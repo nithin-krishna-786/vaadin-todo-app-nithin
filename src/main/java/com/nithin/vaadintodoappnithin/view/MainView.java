@@ -53,12 +53,19 @@ public class MainView extends VerticalLayout {
             return checkbox;
         }).setHeader("Done");
         
-        // Define the 'Action' column with delete button
+
         grid.addComponentColumn(todo -> {
-            Button deleteButton = new Button("Delete", clickEvent -> presenter.delete(todo.getId()));
+            Button deleteButton = new Button("Delete", clickEvent -> {
+                // Instantiate the ConfirmationDialog
+                ConfirmationDialog confirmationDialog = new ConfirmationDialog(
+                    "Delete Confirmation",
+                    "Are you sure you want to delete this item?",
+                    () -> presenter.delete(todo.getId()) // Call your delete logic here
+                );
+                confirmationDialog.open(); // Open the dialog
+            });
             return deleteButton;
         }).setHeader("Action");
-
         
         this.newTodoText = new TextField();
         this.addTodoButton = new Button("Add");
