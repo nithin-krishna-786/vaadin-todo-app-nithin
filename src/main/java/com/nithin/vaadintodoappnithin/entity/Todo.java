@@ -27,6 +27,7 @@ public class Todo {
 	public Todo(String text)
 	{
 		this.text = text;
+		this.done = false;
 	}
 	
 
